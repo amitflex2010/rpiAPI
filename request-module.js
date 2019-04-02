@@ -5,7 +5,7 @@ const url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeap
 request.get(url, (error, response, body) => {
   let json = JSON.parse(body);
   console.log(body);
-blinkLED();
+  var blinkInterval = setInterval(blinkLED, 500); 
 });
 
 function blinkLED() {
