@@ -9,5 +9,10 @@ blinkLED();
 });
 
 function blinkLED() {
- LED.writeSync(1); //set output to 1 i.e turn led on  
+    if (LED.readSync() === 0) {
+        LED.writeSync(1); //set output to 1 i.e turn led on
+      } else {
+        LED.writeSync(0); //set output to 0 i.e. turn led off 
+    
+     } 
   }
