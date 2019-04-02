@@ -1,5 +1,5 @@
 const request = require("request");
-var gpio = require('onoff').gpio;
+var gpio = require('onoff').Gpio;
 var LED = new gpio(4, 'out');
 const url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContacts";
 request.get(url, (error, response, body) => {
