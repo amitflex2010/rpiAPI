@@ -5,13 +5,7 @@ const url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeap
 request.get(url, (error, response, body) => {
   let json = JSON.parse(body);
   console.log(body);
-  pio.write(7, true, function(err) {
-
-    if (err) throw err;
-    console.log('Written True to pin');
-console.log(path.join(__dirname, 'public'));
 blinkLED();
-});
 });
 
 function blinkLED() {
