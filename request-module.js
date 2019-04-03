@@ -1,18 +1,39 @@
 const request = require("request");
 var gpio = require('onoff').Gpio;
-var LED = new gpio(4, 'out');
+var LED_SUCCESS = new gpio(4, 'out');
+var LED_FAILURE = new gpio(6, 'out');
 const url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContacts";
-request.get(url, (error, response, body) => {
-  let json = JSON.parse(body);
-  console.log(body);
-  var blinkInterval = setInterval(blinkLED, 500); 
-});
 
-function blinkLED() {
-    if (LED.readSync() === 0) {
-        LED.writeSync(1); //set output to 1 i.e turn led on
+function checkEndpointStatus() {
+  request.get(url, (error, response, body) => {
+    if(body) {
+      let json = JSON.parse(body);
+    console.log(body);
+      blinkSuccessLED(); 
+    } if(error) {
+      blinkFailureLED();
+    }
+    
+  });
+  
+}
+
+var pollEndpoint = setInterval(checkEndpointStatus, 500000);
+
+function blinkSuccessLED() {
+    if (LED_SUCCESS.readSync() === 0) {
+      LED_SUCCESS.writeSync(1); //set output to 1 i.e turn led on
       } else {
-        LED.writeSync(0); //set output to 0 i.e. turn led off 
+        LED_SUCCESS.writeSync(0); //set output to 0 i.e. turn led off 
+    
+     } 
+  }
+
+  function blinkFailureLED() {
+    if (LED_FAILURE.readSync() === 0) {
+      LED_FAILURE.writeSync(1); //set output to 1 i.e turn led on
+      } else {
+        LED_FAILURE.writeSync(0); //set output to 0 i.e. turn led off 
     
      } 
   }
