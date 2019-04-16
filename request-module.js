@@ -30,6 +30,7 @@ function blinkSuccessLED() {
      } 
 
      var stripObj = nodepixel.Strip(7);
+     console.log(stripObj);
      stripObj.on(new Array("#FF0000","#00FF00","#0000FF"))
   }
 
