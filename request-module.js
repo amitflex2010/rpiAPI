@@ -1,4 +1,5 @@
 const request = require("request");
+const nodepixel = require('neopixel-utils');
 var gpio = require('onoff').Gpio;
 var LED_SUCCESS = new gpio(4, 'out');
 var LED_FAILURE = new gpio(6, 'out');
@@ -18,7 +19,7 @@ function checkEndpointStatus() {
   
 }
 
-var pollEndpoint = setInterval(checkEndpointStatus, 500000);
+var pollEndpoint = setInterval(checkEndpointStatus, 500);
 
 function blinkSuccessLED() {
     if (LED_SUCCESS.readSync() === 0) {
@@ -27,6 +28,9 @@ function blinkSuccessLED() {
         LED_SUCCESS.writeSync(0); //set output to 0 i.e. turn led off 
     
      } 
+
+     var stripObj = nodepixel.Strip(7);
+     stripObj.on(new Array("#FF0000","#00FF00","#0000FF"))
   }
 
   function blinkFailureLED() {
