@@ -19,7 +19,7 @@ function checkEndpointStatus() {
   
 }
 
-var pollEndpoint = setInterval(checkEndpointStatus, 50000);
+var pollEndpoint = setInterval(checkEndpointStatus, 5000);
 
 function blinkSuccessLED() {
     if (LED_SUCCESS.readSync() === 0) {
