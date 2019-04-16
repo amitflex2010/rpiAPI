@@ -1,5 +1,5 @@
 const request = require("request");
-const nodepixel = require('neopixel-utils');
+const nodepixel = require('./neopixel-utils');
 var gpio = require('onoff').Gpio;
 var LED_SUCCESS = new gpio(4, 'out');
 var LED_FAILURE = new gpio(6, 'out');
