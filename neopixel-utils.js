@@ -52,6 +52,7 @@ function Strip(pixelCount) {
 			this.buffer.writeUInt8(colorArray[0], index * 3);
 			this.buffer.writeUInt8(colorArray[1], index * 3 + 1);
 			this.buffer.writeUInt8(colorArray[2], index * 3 + 2);
+			console.log(this.buffer, colorArray);
 		},
 		"getPixelColor": function(index) {
 			return [
@@ -70,7 +71,7 @@ function Strip(pixelCount) {
 		"on": function(color) {
 			for (let i=0; i<this.pixelCount; i++) {
 				this.setPixelColor(i, color);
-				console.log(i, color);
+				
 			}
 		}
 	};
