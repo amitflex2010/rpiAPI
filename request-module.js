@@ -33,7 +33,7 @@ function blinkSuccessLED() {
      
      stripObj.on([255, 0, 255]);
 console.log(stripObj);
-     LED_SUCCESS.writeSync(stripObj);
+     LED_SUCCESS.writeSync(1);
   }
 
   function blinkFailureLED() {
