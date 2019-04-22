@@ -1,7 +1,7 @@
 const request = require("request");
 const nodepixel = require('./neopixel-utils');
 var gpio = require('onoff').Gpio;
-var LED_SUCCESS = new gpio(4, 'out');
+var LED_SUCCESS = new gpio(18, 'out');
 var LED_FAILURE = new gpio(6, 'out');
 const url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContacts";
 
@@ -30,9 +30,9 @@ function blinkSuccessLED() {
      } */
 
      var stripObj = nodepixel.Strip(7);
-     
-     stripObj.on('#ff0000');
-console.log(stripObj);
+     stripObj.on([255, 0, 255]);
+//console.log(stripObj);
+
      LED_SUCCESS.writeSync(stripObj);
   }
 
