@@ -30,10 +30,13 @@ function blinkSuccessLED() {
      } */
 
      var stripObj = nodepixel.Strip(7);
-     
-     stripObj.on([255, 0, 255]);
+     stripObj.setPixelColor(0, [255, 0, 255])
+     stripObj.setPixelColor(1, [255, 0, 255])
+     stripObj.setPixelColor(2, [255, 0, 255])
+     //stripObj.on([255, 0, 255]);
 console.log(stripObj);
-     LED_SUCCESS.writeSync(1);
+
+     LED_SUCCESS.writeSync(stripObj);
   }
 
   function blinkFailureLED() {
