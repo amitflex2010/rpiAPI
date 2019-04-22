@@ -29,9 +29,9 @@ function blinkSuccessLED() {
     
      } */
 
-     var stripObj = nodepixel.Strip(12);
+     var stripObj = nodepixel.Strip(7);
      console.log(stripObj);
-     stripObj.on('#00FF00');
+     stripObj.on('#ff0000');
      LED_SUCCESS.writeSync(stripObj);
   }
 

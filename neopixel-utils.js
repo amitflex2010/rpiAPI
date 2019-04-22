@@ -64,6 +64,7 @@ function Strip(pixelCount) {
 			let color = [0, 0, 0];
 			for (let i=0; i<this.pixelCount; i++) {
 				this.setPixelColor(i, color);
+				console.log(i, color);
 			}
 		},
 		"on": function(color) {
