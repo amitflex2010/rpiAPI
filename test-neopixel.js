@@ -1,5 +1,8 @@
 pixel = require("node-pixel");
 five = require("johnny-five");
+var gpio = require('onoff').Gpio;
+
+var LED_FAILURE = new gpio(6, 'out');
 
 var board = new five.Board();
 var strip = null;
@@ -10,7 +13,7 @@ board.on("ready", function() {
   strip = new pixel.Strip({
     board: this,
     controller: "FIRMATA",
-    strips: [ {pin: 6, length: 7}, ],
+    strips: [ {pin: LED_FAILURE, length: 7}, ],
     gamma: 2.8,
   });
 
