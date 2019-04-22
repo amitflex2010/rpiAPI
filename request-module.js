@@ -31,7 +31,7 @@ function blinkSuccessLED() {
 
      var stripObj = nodepixel.Strip(7);
      console.log(stripObj);
-     stripObj.on(rgb(200, 200, 200))
+     stripObj.on('rgb(200, 200, 200)')
   }
 
   function blinkFailureLED() {
