@@ -31,7 +31,7 @@ function blinkSuccessLED() {
 
      var stripObj = nodepixel.Strip(7);
      
-     stripObj.on('#ff0000');
+     stripObj.on([255, 0, 255]);
 console.log(stripObj);
      LED_SUCCESS.writeSync(stripObj);
   }
