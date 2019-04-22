@@ -2,7 +2,7 @@ pixel = require("node-pixel");
 five = require("johnny-five");
 var gpio = require('onoff').Gpio;
 
-var LED_FAILURE = new gpio(6, 'out');
+var LED_FAILURE = new gpio(4, 'out');
 
 var board = new five.Board();
 var strip = null;
