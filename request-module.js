@@ -31,10 +31,12 @@ function blinkSuccessLED() {
 
      var stripObj = nodepixel.Strip(7);
      stripObj.setPixelColor(0, [255, 0, 255])
+     LED_SUCCESS.writeSync(stripObj);
      stripObj.setPixelColor(1, [255, 0, 255])
+     LED_SUCCESS.writeSync(stripObj);
      stripObj.setPixelColor(2, [255, 0, 255])
      //stripObj.on([255, 0, 255]);
-console.log(stripObj);
+//console.log(stripObj);
 
      LED_SUCCESS.writeSync(stripObj);
   }
