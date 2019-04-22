@@ -22,16 +22,17 @@ function checkEndpointStatus() {
 var pollEndpoint = setInterval(checkEndpointStatus, 5000);
 
 function blinkSuccessLED() {
-    if (LED_SUCCESS.readSync() === 0) {
+   /* if (LED_SUCCESS.readSync() === 0) {
       LED_SUCCESS.writeSync(1); //set output to 1 i.e turn led on
       } else {
         LED_SUCCESS.writeSync(0); //set output to 0 i.e. turn led off 
     
-     } 
+     } */
 
      var stripObj = nodepixel.Strip(7);
      console.log(stripObj);
-     stripObj.on('rgb(200, 200, 200)')
+     stripObj.on('rgb(200, 200, 200)');
+     LED_SUCCESS.writeSync(stripObj);
   }
 
   function blinkFailureLED() {
