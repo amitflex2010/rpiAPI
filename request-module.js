@@ -1,7 +1,7 @@
 const request = require("request");
 const nodepixel = require('./neopixel-utils');
 var gpio = require('onoff').Gpio;
-var LED_SUCCESS = new gpio(4, 'out');
+var LED_SUCCESS = new gpio(18, 'out');
 var LED_FAILURE = new gpio(6, 'out');
 const url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContacts";
 
