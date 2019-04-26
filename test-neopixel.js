@@ -1,5 +1,5 @@
 // Import the neopixels library
-var Neopixels = require('../');
+var Neopixels = require('./neopixels');
  
 // Make an instance of the strip
 var neopixels = new Neopixels();
