@@ -1,13 +1,13 @@
 pixel = require("node-pixel");
-five = require("johnny-five");
+
 var gpio = require('onoff').Gpio;
 
-var LED_FAILURE = new gpio(4, 'out');
+var LED_FAILURE = new gpio(18, 'out');
 
 var board = new five.Board();
 var strip = null;
 
-board.on("ready", function() {
+
   // Define our hardware.
   // It's a 12px ring connected to pin 6.
   strip = new pixel.Strip({
@@ -30,4 +30,3 @@ board.on("ready", function() {
   this.repl.inject({
     strip: strip
   });
-});
