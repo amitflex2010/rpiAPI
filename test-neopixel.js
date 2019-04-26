@@ -11,7 +11,6 @@ var strip = null;
   // It's a 12px ring connected to pin 6.
   strip = new pixel.Strip({
     board: this,
-    controller: "FIRMATA",
     strips: [ {pin: LED_FAILURE, length: 7}, ],
     gamma: 2.8,
   });
