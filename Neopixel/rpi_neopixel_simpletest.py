@@ -1,75 +1,48 @@
-# Simple test for NeoPixels on Raspberry Pi
+# NeoPixel Ring Demo script (12 LED)
+#  https://raspberrytips.nl
+
 import time
-import board
-import neopixel
 
+from neopixel import  *
+from random import randint
 
-# Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
-# NeoPixels must be connected to D10, D12, D18 or D21 to work.
-pixel_pin = board.D18
+LEDS         =  12      # Number of LEDs
+PIN          =  18      # GPIO 18 / PIN 12
+BRIGHTNESS   =  55      # min 0 / max 255
 
-# The number of NeoPixels
-num_pixels = 7
+KLEUR_R      = randint ( 0 , 255 )
+KLEUR_G      = randint ( 0 , 255 )
+KLEUR_B      = randint ( 0 , 255 )
 
-# The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
-# For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
-ORDER = neopixel.GRB
+def  loopLed ( ring , color , wait_ms ):
 
-pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=0.2, auto_write=False,
-                           pixel_order=ORDER)
+        for i in  range (ring.numPixels ()):
+                ring.setPixelColor (i, color)
+                ring.show ()
+                time.sleep (wait_ms / 1000.0 )
+                ring.setPixelColor (i, 0 )
+                ring.setPixelColor (i - 1 , 0 )
 
+        for i in  range (ring.numPixels () - 1 , - 1 , - 1 ):
+                ring.setPixelColor (i, color)
+                ring.show ()
+                time.sleep (wait_ms / 1000.0 )
+                ring.setPixelColor (i, 0 )
+                ring.setPixelColor (i + 1 , 0 )
 
-def wheel(pos):
-    # Input a value 0 to 255 to get a color value.
-    # The colours are a transition r - g - b - back to r.
-    if pos < 0 or pos > 255:
-        r = g = b = 0
-    elif pos < 85:
-        r = int(pos * 3)
-        g = int(255 - pos*3)
-        b = 0
-    elif pos < 170:
-        pos -= 85
-        r = int(255 - pos*3)
-        g = 0
-        b = int(pos*3)
-    else:
-        pos -= 170
-        r = 0
-        g = int(pos*3)
-        b = int(255 - pos*3)
-    return (r, g, b) if ORDER == neopixel.RGB or ORDER == neopixel.GRB else (r, g, b, 0)
+def  resetLeds ( ring , color , wait_ms = 10 ):
 
+        for i in  range (ring.numPixels ()):
+                ring.setPixelColor (i, color)
+                ring.show ()
 
-def rainbow_cycle(wait):
-    for j in range(255):
-        for i in range(num_pixels):
-            pixel_index = (i * 256 // num_pixels) + j
-            pixels[i] = wheel(pixel_index & 255)
-        pixels.show()
-        time.sleep(wait)
+if  __name__  ==  ' __main__ ' :
 
-rainbow_cycle(0.001)
-# while True:
-    # Comment this line out if you have RGBW/GRBW NeoPixels
-    # pixels.fill((255, 0, 0))
-    # Uncomment this line if you have RGBW/GRBW NeoPixels
-    # pixels.fill((255, 0, 0, 0))
-    # pixels.show()
-    # time.sleep(1)
+        ring = Adafruit_NeoPixel ( LEDS , PIN , 800000 , 5 , False , BRIGHTNESS )
 
-    # Comment this line out if you have RGBW/GRBW NeoPixels
-    # pixels.fill((0, 255, 0))
-    # Uncomment this line if you have RGBW/GRBW NeoPixels
-    # pixels.fill((0, 255, 0, 0))
-    # pixels.show()
-    # time.sleep(1)
+        ring.start ()
 
-    # Comment this line out if you have RGBW/GRBW NeoPixels
-    # pixels.fill((0, 0, 255))
-    # Uncomment this line if you have RGBW/GRBW NeoPixels
-    # pixels.fill((0, 0, 255, 0))
-    # pixels.show()
-    # time.sleep(1)
+        for t in  range ( 0 , 5 , 1 ):
+                loopLed (ring, Color ( COLOR_G , COLOR_R , COLOR_B ), 100 )
 
-    # rainbow_cycle(0.001)    # rainbow cycle with 1ms delay per step
+        resetLeds (ring, Color ( 0 , 0 , 0 ))
