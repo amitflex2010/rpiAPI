@@ -6,7 +6,7 @@ import time
 from neopixel import  *
 from random import randint
 
-LEDS         =  12      # Number of LEDs
+LEDS         =  7      # Number of LEDs
 PIN          =  18      # GPIO 18 / PIN 12
 BRIGHTNESS   =  55      # min 0 / max 255
 
