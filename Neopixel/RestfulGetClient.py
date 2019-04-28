@@ -4,12 +4,49 @@
 import requests
 from requests.auth import HTTPDigestAuth
 import json
+import time
+
+from neopixel import *
+from random import randint
+
+LEDS        = 7     # Aantel LEDS
+PIN         = 18     # GPIO 18 / PIN 12
+BRIGHTNESS  = 55     # min 0 / max 255
+
+KLEUR_R     = 0
+KLEUR_G     = 255
+KLEUR_B     = 0
+
 
 # Replace with the correct URL
 url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContacts"
 
+def loopLed(ring, color, wait_ms):
+
+        for i in range(ring.numPixels()):
+                ring.setPixelColor(i,color)
+                ring.show()
+                time.sleep(wait_ms/1000.0)
+               # ring.setPixelColor(i,0)
+               # ring.setPixelColor(i-1,0)
+
+       # for i in range(ring.numPixels()-1,-1,-1):
+               # ring.setPixelColor(i,color)
+                # ring.show()
+          #      time.sleep(wait_ms/1000.0)
+           #     ring.setPixelColor(i,0)
+            #    ring.setPixelColor(i+1,0)
+
+def resetLeds(ring, color, wait_ms=10):
+
+        for i in range(ring.numPixels()):
+                ring.setPixelColor(i, color)
+                ring.show()
+
 # It is a good practice not to hardcode the credentials. So ask the user to enter credentials at runtime
 myResponse = requests.get(url)
+ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
+ring.begin()
 #print (myResponse.status_code)
 
 # For successful API call, response code will be 200 (OK)
@@ -20,9 +57,11 @@ if(myResponse.ok):
 	# Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
 	jData = json.loads(myResponse.content)
 	
-	print("The response contains {0} properties".format(len(jData)))
-	print(jData)
+        
+    loopLed (ring, Color(KLEUR_G, 0, 0),100)
+	
 
 else:
   # If response code is not ok (200), print the resulting http error code with description
+  	loopLed (ring, Color(0, KLEUR_R, 0),100)
 	myResponse.raise_for_status()
