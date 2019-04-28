@@ -10,9 +10,9 @@ LEDS        = 7     # Aantel LEDS
 PIN         = 18     # GPIO 18 / PIN 12
 BRIGHTNESS  = 55     # min 0 / max 255
 
-KLEUR_R     = randint(0,255)
-KLEUR_G     = randint(0,255)
-KLEUR_B     = randint(0,255)
+KLEUR_R     = 255
+KLEUR_G     = 0
+KLEUR_B     = 0
 
 def loopLed(ring, color, wait_ms):
 
@@ -20,15 +20,15 @@ def loopLed(ring, color, wait_ms):
                 ring.setPixelColor(i,color)
                 ring.show()
                 time.sleep(wait_ms/1000.0)
-                ring.setPixelColor(i,0)
-                ring.setPixelColor(i-1,0)
+               # ring.setPixelColor(i,0)
+               # ring.setPixelColor(i-1,0)
 
-        for i in range(ring.numPixels()-1,-1,-1):
-                ring.setPixelColor(i,color)
-                ring.show()
-                time.sleep(wait_ms/1000.0)
-                ring.setPixelColor(i,0)
-                ring.setPixelColor(i+1,0)
+       # for i in range(ring.numPixels()-1,-1,-1):
+               # ring.setPixelColor(i,color)
+                # ring.show()
+          #      time.sleep(wait_ms/1000.0)
+           #     ring.setPixelColor(i,0)
+            #    ring.setPixelColor(i+1,0)
 
 def resetLeds(ring, color, wait_ms=10):
 
@@ -38,11 +38,15 @@ def resetLeds(ring, color, wait_ms=10):
 
 if __name__ == '__main__':
 
-        ring = Adafruit_NeoPixel(LEDS, PIN, 800000, 5, False, BRIGHTNESS)
+        ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
 
         ring.begin()
+        
 
-        for t in range (0, 5, 1):
-                loopLed (ring,Color(KLEUR_G, KLEUR_R, KLEUR_B),100)
-
-        resetLeds (ring,Color(0,0,0))
+       # loopLed(ring, Color(0,0,0),1000) 
+    
+        loopLed (ring, Color(KLEUR_G, KLEUR_R, KLEUR_B),100)
+        #loopLed(ring, Color(0,255,0),100)
+        #loopLed(ring, Color(0,255,255),100)
+        #loopLed(ring, Color(0,255,255),100)
+           # resetLeds (ring,Color(0,0,0))
