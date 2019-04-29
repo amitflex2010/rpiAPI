@@ -62,11 +62,10 @@ def pollEndPoint():
 	    myResponse.raise_for_status()
     
 
-if __name__ == '__main__':
 
-    ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
-    ring.begin()
-    timer = threading.Timer(10.0, pollEndPoint) 
-    timer.start() 
+ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
+ring.begin()
+timer = threading.Timer(10.0, pollEndPoint) 
+timer.start() 
 
 	
