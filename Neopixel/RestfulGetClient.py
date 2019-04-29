@@ -55,10 +55,11 @@ def pollEndPoint(sc):
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
 	    jData = json.loads(myResponse.content)
             print(jData)
-
+            resetLeds (ring,Color(0,0,0))    
             loopLed (ring, Color(KLEUR_G, 0, 0),100)
         else:
         # If response code is not ok (200), print the resulting http error code with description
+            resetLeds (ring,Color(0,0,0))
     	    loopLed (ring, Color(0, KLEUR_R, 0),100)
 	    myResponse.raise_for_status()
 
