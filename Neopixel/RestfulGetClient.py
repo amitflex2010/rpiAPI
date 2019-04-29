@@ -15,13 +15,13 @@ LEDS        = 7     # Aantel LEDS
 PIN         = 18     # GPIO 18 / PIN 12
 BRIGHTNESS  = 55     # min 0 / max 255
 
-KLEUR_R     = 0
+KLEUR_R     = 255
 KLEUR_G     = 255
 KLEUR_B     = 0
 
 
 # Replace with the correct URL
-url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContacts"
+url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContact"
 
 def loopLed(ring, color, wait_ms):
 
@@ -49,6 +49,7 @@ def pollEndPoint(sc):
 
         myResponse = requests.get(url)
         # For successful API call, response code will be 200 (OK)
+    
         if(myResponse.ok):
         # Loading the response data into a dict variable
 	# json.loads takes in only binary or string variables so using content to fetch binary content
@@ -59,9 +60,10 @@ def pollEndPoint(sc):
             loopLed (ring, Color(KLEUR_G, 0, 0),100)
         else:
         # If response code is not ok (200), print the resulting http error code with description
+            print(myResponse.status_code)
             resetLeds (ring,Color(0,0,0))
     	    loopLed (ring, Color(0, KLEUR_R, 0),100)
-	    myResponse.raise_for_status()
+	   # myResponse.raise_for_status()
 
         s.enter(10,1, pollEndPoint, (sc,))    
     
