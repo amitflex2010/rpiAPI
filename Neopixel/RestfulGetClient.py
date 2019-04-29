@@ -44,15 +44,8 @@ def resetLeds(ring, color, wait_ms=10):
                 ring.setPixelColor(i, color)
                 ring.show()
 
-# It is a good practice not to hardcode the credentials. So ask the user to enter credentials at runtim
-if __name__ == '__main__':
-
-    ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
-    ring.begin()
-    timer = threading.Timer(10.0, pollEndPoint) 
-    timer.start() 
-
 def pollEndPoint():
+
         myResponse = requests.get(url)
         # For successful API call, response code will be 200 (OK)
         if(myResponse.ok):
@@ -68,5 +61,12 @@ def pollEndPoint():
     	    loopLed (ring, Color(0, KLEUR_R, 0),100)
 	    myResponse.raise_for_status()
     
+
+if __name__ == '__main__':
+
+    ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
+    ring.begin()
+    timer = threading.Timer(10.0, pollEndPoint) 
+    timer.start() 
 
 	
