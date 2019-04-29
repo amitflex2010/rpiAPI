@@ -64,11 +64,11 @@ def pollEndPoint(sc):
 
         s.enter(10,1, pollEndPoint, (sc,))    
     
-
+ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
+ring.begin()
 s = sched.scheduler(time.time, time.sleep)
 s.enter(10, 1, pollEndPoint, (s,))
 s.run()
-ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
-ring.begin()
+
 
 	
