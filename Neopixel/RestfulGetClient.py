@@ -5,6 +5,7 @@ import requests
 from requests.auth import HTTPDigestAuth
 import json
 import time
+import threading 
 
 from neopixel import *
 from random import randint
@@ -46,24 +47,26 @@ def resetLeds(ring, color, wait_ms=10):
 # It is a good practice not to hardcode the credentials. So ask the user to enter credentials at runtim
 if __name__ == '__main__':
 
-    myResponse = requests.get(url)
     ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
     ring.begin()
-#print (myResponse.status_code)
+    timer = threading.Timer(10.0, pollEndPoint) 
+    timer.start() 
 
-# For successful API call, response code will be 200 (OK)
-    if(myResponse.ok):
-
-	# Loading the response data into a dict variable
+def pollEndPoint():
+        myResponse = requests.get(url)
+        # For successful API call, response code will be 200 (OK)
+        if(myResponse.ok):
+        # Loading the response data into a dict variable
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
 	    jData = json.loads(myResponse.content)
-	
-        
-            loopLed (ring, Color(KLEUR_G, 0, 0),100)
-	
+            print(jData)
 
-    else:
-  # If response code is not ok (200), print the resulting http error code with description
+            loopLed (ring, Color(KLEUR_G, 0, 0),100)
+        else:
+        # If response code is not ok (200), print the resulting http error code with description
     	    loopLed (ring, Color(0, KLEUR_R, 0),100)
 	    myResponse.raise_for_status()
+    
+
+	
