@@ -4,8 +4,9 @@
 import requests
 from requests.auth import HTTPDigestAuth
 import json
-import time
+import sched, time
 import threading 
+
 
 from neopixel import *
 from random import randint
@@ -44,7 +45,7 @@ def resetLeds(ring, color, wait_ms=10):
                 ring.setPixelColor(i, color)
                 ring.show()
 
-def pollEndPoint():
+def pollEndPoint(sc):
 
         myResponse = requests.get(url)
         # For successful API call, response code will be 200 (OK)
@@ -60,12 +61,14 @@ def pollEndPoint():
         # If response code is not ok (200), print the resulting http error code with description
     	    loopLed (ring, Color(0, KLEUR_R, 0),100)
 	    myResponse.raise_for_status()
+
+        s.enter(10,1, pollEndPoint, (sc,))    
     
 
-
+s = sched.scheduler(time.time, time.sleep)
+s.enter(10, 1, pollEndPoint, (s,))
+s.run()
 ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
 ring.begin()
-timer = threading.Timer(10.0, pollEndPoint) 
-timer.start() 
 
 	
