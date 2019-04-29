@@ -11,7 +11,7 @@ import threading
 from neopixel import *
 from random import randint
 
-LEDS        = 7     # Aantel LEDS
+LEDS        = 12     # Aantel LEDS
 PIN         = 18     # GPIO 18 / PIN 12
 BRIGHTNESS  = 55     # min 0 / max 255
 
@@ -29,15 +29,6 @@ def loopLed(ring, color, wait_ms):
                 ring.setPixelColor(i,color)
                 ring.show()
                 time.sleep(wait_ms/1000.0)
-               # ring.setPixelColor(i,0)
-               # ring.setPixelColor(i-1,0)
-
-       # for i in range(ring.numPixels()-1,-1,-1):
-               # ring.setPixelColor(i,color)
-                # ring.show()
-          #      time.sleep(wait_ms/1000.0)
-           #     ring.setPixelColor(i,0)
-            #    ring.setPixelColor(i+1,0)
 
 def resetLeds(ring, color, wait_ms=10):
 
