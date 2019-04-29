@@ -21,7 +21,7 @@ KLEUR_B     = 0
 
 
 # Replace with the correct URL
-url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContact"
+url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContacts"
 
 def loopLed(ring, color, wait_ms):
 
