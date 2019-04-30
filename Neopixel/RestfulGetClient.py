@@ -21,7 +21,7 @@ KLEUR_B     = 0
 
 
 # Replace with the correct URL
-url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContacts"
+url = "https://api-dashboard-ite.klm.com/api/postman/flows?envName=ute3&&isFlow=false"
 
 def loopLed(ring, color, wait_ms):
 
