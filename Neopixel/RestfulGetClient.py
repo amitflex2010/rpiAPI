@@ -56,10 +56,31 @@ def pollEndPoint(sc):
     	    loopLed (ring, Color(0, KLEUR_R, 0),100)
 	   # myResponse.raise_for_status()
 
-        s.enter(10,1, pollEndPoint, (sc,))    
+        s.enter(10,1, pollEndPoint, (sc,))   
+
+def initialSetup():
+        myResponse = requests.get(url)
+        # For successful API call, response code will be 200 (OK)
+    
+        if(myResponse.ok):
+        # Loading the response data into a dict variable
+	# json.loads takes in only binary or string variables so using content to fetch binary content
+        # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
+	    jData = json.loads(myResponse.content)
+            print(jData)
+            resetLeds (ring,Color(0,0,0))    
+            loopLed (ring, Color(KLEUR_G, 0, 0),100)
+        else:
+        # If response code is not ok (200), print the resulting http error code with description
+            print(myResponse.status_code)
+            resetLeds (ring,Color(0,0,0))
+    	    loopLed (ring, Color(0, KLEUR_R, 0),100)
+	   # myResponse.raise_for_status()
+                    
     
 ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
 ring.begin()
+initialSetup()
 s = sched.scheduler(time.time, time.sleep)
 s.enter(10, 1, pollEndPoint, (s,))
 s.run()
