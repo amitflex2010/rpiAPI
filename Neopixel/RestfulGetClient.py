@@ -46,7 +46,11 @@ def pollEndPoint(sc):
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
 	    jData = json.loads(myResponse.content)
-            print(jData)
+            #print(jData)
+            for key in jsonObject:
+                value = jsonObject[key]
+                print("The key and value are ({}) = ({})".format(key, value))
+
             resetLeds (ring,Color(0,0,0))    
             loopLed (ring, Color(KLEUR_G, 0, 0),100)
         else:
