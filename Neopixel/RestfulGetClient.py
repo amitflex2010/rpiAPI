@@ -59,7 +59,7 @@ def blackout(strip1):
 
 def pollEndPoint(sc):
 
-       try:
+        try:
             myResponse = requests.get(url)
         except requests.exceptions.ConnectionError as errc:
             blackout(ring) 
@@ -79,7 +79,7 @@ def pollEndPoint(sc):
                         #if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
                             #print song['status']
                             #blackout(ring) 
-                            l#oopLed (ring, Color(KLEUR_R, 0, 0),100)
+                            #loopLed (ring, Color(KLEUR_R, 0, 0),100)
                         #else:
                              #blackout(ring)     
                              #loopLed (ring, Color(0, KLEUR_G, 0),100)    
@@ -105,13 +105,14 @@ def initialSetup():
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
                 jData = json.loads(myResponse.content)
+                print("data")
                 blackout(ring)
                 loopLed (ring, Color(0, KLEUR_G, 0),100)
                 #for song in jsonObject["stepDetails"]:   
                         #if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
                             #print song['status']
                             #blackout(ring) 
-                            l#oopLed (ring, Color(KLEUR_R, 0, 0),100)
+                            #loopLed (ring, Color(KLEUR_R, 0, 0),100)
                         #else:
                              #blackout(ring)     
                              #loopLed (ring, Color(0, KLEUR_G, 0),100)    
