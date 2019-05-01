@@ -26,22 +26,22 @@ LED_1_STRIP      = ws.SK6812_STRIP_GRBW
 def loopLed(ring, color, wait_ms):
 
        for i in range(strip1.numPixels()):
-		if i % 2:
-			# even number
-			strip1.setPixelColor(i, color1)
-			strip1.show()
-			time.sleep(wait_ms/1000.0)
-		else:
-			# odd number
-			strip1.setPixelColor(i, color1)
-			strip1.show()
-			time.sleep(wait_ms/1000.0)
-	time.sleep(1)
-        
+	   if i % 2:
+                # even number
+                strip1.setPixelColor(i, color1)
+                strip1.show()
+                time.sleep(wait_ms/1000.0)
+           else:
+                # odd number
+                strip1.setPixelColor(i, color1)
+                strip1.show()
+                time.sleep(wait_ms/1000.0)
+	        time.sleep(1)
+
 def blackout(strip):
 	for i in range(max(strip1.numPixels(), strip1.numPixels())):
-		strip.setPixelColor(i, Color(0,0,0))
-		strip.show()
+	    strip.setPixelColor(i, Color(0,0,0))
+	    strip.show()
 
 if __name__ == '__main__':
 
