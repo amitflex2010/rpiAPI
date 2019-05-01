@@ -70,27 +70,27 @@ def pollEndPoint(sc):
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
                 jData = json.loads(myResponse.content)
                 blackout(ring)
-                loopLed (ring, Color(0, KLEUR_G, 0),5)
+                loopLed (ring, Color(0, KLEUR_G, 0),100)
                 #for song in jsonObject["stepDetails"]:   
                         #if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
                             #print song['status']
                             #blackout(ring) 
-                            #loopLed (ring, Color(KLEUR_R, 0, 0),5)
+                            #loopLed (ring, Color(KLEUR_R, 0, 0),100)
                         #else:
                              #blackout(ring)     
-                             #loopLed (ring, Color(0, KLEUR_G, 0),5)    
+                             #loopLed (ring, Color(0, KLEUR_G, 0),100)    
 
                 #pass
             else:
         # If response code is not ok (200), print the resulting http error code with description
                         print(myResponse.status_code)
                         blackout(ring) 
-                        loopLed (ring, Color(KLEUR_R, 0, 0),5)
+                        loopLed (ring, Color(KLEUR_R, 0, 0),100)
                 # myResponse.raise_for_status()
 
         except requests.exceptions.ConnectionError as errc:
             blackout(ring) 
-            loopLed (ring, Color(KLEUR_R, 0, 0),5)    
+            loopLed (ring, Color(KLEUR_R, 0, 0),100)    
             print ("Http Error:",errc)
             sys.exit(1)        
 
@@ -109,7 +109,7 @@ def initialSetup():
                 jData = json.loads(myResponse.content)
                 print('data')
                 blackout(ring)
-                loopLed (ring, Color(0, KLEUR_G, 0),5)
+                loopLed (ring, Color(0, KLEUR_G, 0),100)
                 #for song in jsonObject["stepDetails"]:   
                         #if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
                             #print song['status']
@@ -124,11 +124,11 @@ def initialSetup():
         # If response code is not ok (200), print the resulting http error code with description
                 print(myResponse.status_code)
                 blackout(ring) 
-                loopLed (ring, Color(KLEUR_R, 0, 0),5)
+                loopLed (ring, Color(KLEUR_R, 0, 0),100)
                 # myResponse.raise_for_status()
         except requests.exceptions.ConnectionError as errc:
             blackout(ring) 
-            loopLed (ring, Color(KLEUR_R, 0, 0),5)    
+            loopLed (ring, Color(KLEUR_R, 0, 0),100)    
             print ("Http Error:",errc)
             sys.exit(1)        
                     
