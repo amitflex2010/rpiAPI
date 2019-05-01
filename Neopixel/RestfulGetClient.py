@@ -73,6 +73,7 @@ def initialSetup():
             myResponse = requests.get(url)
         except requests.exceptions.ConnectionError as errc:
             print ("Http Error:",errc)
+            sys.exit(1)
         # For successful API call, response code will be 200 (OK)
     
             if(myResponse.ok):
