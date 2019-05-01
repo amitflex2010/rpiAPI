@@ -17,7 +17,16 @@ KLEUR_B     = 0
 def loopLed(ring, color, wait_ms):
 
         for i in range(ring.numPixels()):
-                ring.setPixelColor(i,color)
+                ring.setPixelColor(0,color)
+                ring.show()
+                time.sleep(wait_ms/1000.0)
+                ring.setPixelColor(1,color)
+                ring.show()
+                time.sleep(wait_ms/1000.0)
+                ring.setPixelColor(2,color)
+                ring.show()
+                time.sleep(wait_ms/1000.0)
+                ring.setPixelColor(3,color)
                 ring.show()
                 time.sleep(wait_ms/1000.0)
                # ring.setPixelColor(i,0)
