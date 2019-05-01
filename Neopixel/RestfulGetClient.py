@@ -69,10 +69,13 @@ def pollEndPoint(sc):
         s.enter(10,1, pollEndPoint, (sc,))   
 
 def initialSetup():
-        myResponse = requests.get(url)
+        try:
+            myResponse = requests.get(url)
+        except requests.exceptions.ConnectionError as errc:
+            print ("Http Error:",errc)
         # For successful API call, response code will be 200 (OK)
     
-        if(myResponse.ok):
+            if(myResponse.ok):
         # Loading the response data into a dict variable
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
@@ -87,7 +90,7 @@ def initialSetup():
                     loopLed (ring, Color(KLEUR_G, 0, 0),100)    
 
             pass
-        else:
+            else:
         # If response code is not ok (200), print the resulting http error code with description
             print(myResponse.status_code)
             resetLeds (ring,Color(0,0,0))
