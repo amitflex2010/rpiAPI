@@ -48,7 +48,7 @@ def pollEndPoint(sc):
 	    jData = json.loads(myResponse.content)
             #print(jData)
             for song in jsonObject["stepDetails"]:   
-                if song['servicename'] == "BRE" and song['servicename'] == "FAIL"  :
+                if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
 		    print song['status']
                     resetLeds (ring,Color(0,0,0))
     	            loopLed (ring, Color(0, KLEUR_R, 0),100)
@@ -78,7 +78,7 @@ def initialSetup():
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
 	    jData = json.loads(myResponse.content)
            for song in jsonObject["stepDetails"]:   
-                if song['servicename'] == "BRE" and song['servicename'] == "FAIL"  :
+                if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
 		    print song['status']
                     resetLeds (ring,Color(0,0,0))
     	            loopLed (ring, Color(0, KLEUR_R, 0),100)
