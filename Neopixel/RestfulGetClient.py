@@ -52,7 +52,7 @@ def pollEndPoint(sc):
 		    print song['status']
                     resetLeds (ring,Color(0,0,0))
     	            loopLed (ring, Color(0, KLEUR_R, 0),100)
-                else
+                else:
                     resetLeds (ring,Color(0,0,0))    
                     loopLed (ring, Color(KLEUR_G, 0, 0),100)    
 
@@ -77,9 +77,16 @@ def initialSetup():
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
 	    jData = json.loads(myResponse.content)
-            print(jData)
-            resetLeds (ring,Color(0,0,0))    
-            loopLed (ring, Color(KLEUR_G, 0, 0),100)
+           for song in jsonObject["stepDetails"]:   
+                if song['servicename'] == "BRE" and song['servicename'] == "FAIL"  :
+		    print song['status']
+                    resetLeds (ring,Color(0,0,0))
+    	            loopLed (ring, Color(0, KLEUR_R, 0),100)
+                else:
+                    resetLeds (ring,Color(0,0,0))    
+                    loopLed (ring, Color(KLEUR_G, 0, 0),100)    
+
+            pass
         else:
         # If response code is not ok (200), print the resulting http error code with description
             print(myResponse.status_code)
