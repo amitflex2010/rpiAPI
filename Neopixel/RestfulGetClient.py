@@ -17,25 +17,45 @@ PIN         = 18     # GPIO 18 / PIN 12
 BRIGHTNESS  = 55     # min 0 / max 255
 
 KLEUR_R     = 255
-KLEUR_G     = 255
+KLEUR_G     = 0
 KLEUR_B     = 0
+
+LED_1_COUNT      = 30      # Number of LED pixels.
+LED_1_PIN        = 18      # GPIO pin connected to the pixels (must support PWM! GPIO 13 and 18 on RPi 3).
+LED_1_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
+LED_1_DMA        = 10      # DMA channel to use for generating signal (Between 1 and 14)
+LED_1_BRIGHTNESS = 128     # Set to 0 for darkest and 255 for brightest
+LED_1_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
+LED_1_CHANNEL    = 0       # 0 or 1
+LED_1_STRIP      = ws.SK6812_STRIP_GRBW
+
 
 
 # Replace with the correct URL
 url = "https://api-dashboard-ite.klm.com/api/postman/flows?envName=ute3&&isFlow=false"
 
-def loopLed(ring, color, wait_ms):
+def loopLed(strip1, color1, wait_ms):
 
-        for i in range(ring.numPixels()):
-                ring.setPixelColor(i,color)
-                ring.show()
+       for i in range(strip1.numPixels()):
+	   if i % 2:
+                # even number
+                strip1.setPixelColor(i, color1)
+                strip1.show()
+                time.sleep(wait_ms/1000.0)
+           else:
+                # odd number
+                strip1.setPixelColor(i, color1)
+                strip1.show()
                 time.sleep(wait_ms/1000.0)
 
-def resetLeds(ring, color, wait_ms=10):
+       time.sleep(1)
 
-        for i in range(ring.numPixels()):
-                ring.setPixelColor(i, color)
-                ring.show()
+
+def blackout(strip1):
+	for i in range(max(strip1.numPixels(), strip1.numPixels())):
+	    strip1.setPixelColor(i, Color(0,0,0))
+	    strip1.show()
+
 
 def pollEndPoint(sc):
 
@@ -51,11 +71,11 @@ def pollEndPoint(sc):
             for song in jsonObject["stepDetails"]:   
                 if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
 		    print song['status']
-                    resetLeds (ring,Color(0,0,0))
-    	            loopLed (ring, Color(0, KLEUR_R, 0),100)
+                    blackout(ring) 
+    	            loopLed (ring, Color(KLEUR_R, 0, 0),100)
                 else:
                     resetLeds (ring,Color(0,0,0))    
-                    loopLed (ring, Color(KLEUR_G, 0, 0),100)    
+                    loopLed (ring, Color(0, KLEUR_G, 0),100)    
 
             pass
 
@@ -63,8 +83,8 @@ def pollEndPoint(sc):
         else:
         # If response code is not ok (200), print the resulting http error code with description
             print(myResponse.status_code)
-            resetLeds (ring,Color(0,0,0))
-    	    loopLed (ring, Color(0, KLEUR_R, 0),100)
+            blackout(ring) 
+    	    loopLed (ring, Color(KLEUR_R, 0, 0),100)
 	   # myResponse.raise_for_status()
 
         s.enter(10,1, pollEndPoint, (sc,))   
@@ -73,8 +93,8 @@ def initialSetup():
         try:
             myResponse = requests.get(url)
         except requests.exceptions.ConnectionError as errc:
-            resetLeds (ring,Color(0,0,0))
-            loopLed (ring, Color(0, KLEUR_R, 0),100)    
+            blackout(ring) 
+            loopLed (ring, Color(KLEUR_R, 0, 0),100)    
             print ("Http Error:",errc)
             sys.exit(1)
         # For successful API call, response code will be 200 (OK)
@@ -87,22 +107,23 @@ def initialSetup():
                 for song in jsonObject["stepDetails"]:   
                         if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
                             print song['status']
-                            resetLeds (ring,Color(0,0,0))
-                            loopLed (ring, Color(0, KLEUR_R, 0),100)
+                            blackout(ring) 
+                            loopLed (ring, Color(KLEUR_R, 0, 0),100)
                         else:
-                             resetLeds (ring,Color(0,0,0))    
-                             loopLed (ring, Color(KLEUR_G, 0, 0),100)    
+                             blackout(ring)     
+                             loopLed (ring, Color(0, KLEUR_G, 0),100)    
 
                 pass
             else:
         # If response code is not ok (200), print the resulting http error code with description
                         print(myResponse.status_code)
-                        resetLeds (ring,Color(0,0,0))
-                        loopLed (ring, Color(0, KLEUR_R, 0),100)
+                        blackout(ring) 
+                        loopLed (ring, Color(KLEUR_R, 0, 0),100)
                 # myResponse.raise_for_status()
                     
-    
-ring = Adafruit_NeoPixel(LEDS , PIN , 800000 , 7 , False , BRIGHTNESS)
+
+
+ring = ring = Adafruit_NeoPixel(LED_1_COUNT, LED_1_PIN, LED_1_FREQ_HZ, LED_1_DMA, LED_1_INVERT, LED_1_BRIGHTNESS, LED_1_CHANNEL, LED_1_STRIP)
 ring.begin()
 initialSetup()
 s = sched.scheduler(time.time, time.sleep)
