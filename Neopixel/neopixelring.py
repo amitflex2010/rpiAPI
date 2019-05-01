@@ -23,7 +23,7 @@ LED_1_INVERT     = False   # True to invert the signal (when using NPN transisto
 LED_1_CHANNEL    = 0       # 0 or 1
 LED_1_STRIP      = ws.SK6812_STRIP_GRBW
 
-def loopLed(ring, color, wait_ms):
+def loopLed(strip1, color1, wait_ms):
 
        for i in range(strip1.numPixels()):
 	   if i % 2:
@@ -36,12 +36,13 @@ def loopLed(ring, color, wait_ms):
                 strip1.setPixelColor(i, color1)
                 strip1.show()
                 time.sleep(wait_ms/1000.0)
-	        time.sleep(1)
 
-def blackout(strip):
+       time.sleep(1)
+
+def blackout(strip1):
 	for i in range(max(strip1.numPixels(), strip1.numPixels())):
-	    strip.setPixelColor(i, Color(0,0,0))
-	    strip.show()
+	    strip1.setPixelColor(i, Color(0,0,0))
+	    strip1.show()
 
 if __name__ == '__main__':
 
@@ -52,7 +53,7 @@ if __name__ == '__main__':
 
         blackout(ring) 
     
-        loopLed (ring, Color(KLEUR_G, KLEUR_R, KLEUR_B),100)
+        loopLed (ring, Color(255, 0, 0),5)
         #loopLed(ring, Color(0,255,0),100)
         #loopLed(ring, Color(0,255,255),100)
         #loopLed(ring, Color(0,255,255),100)
