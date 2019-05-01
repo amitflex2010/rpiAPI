@@ -77,7 +77,7 @@ def initialSetup():
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
 	    jData = json.loads(myResponse.content)
-           for song in jsonObject["stepDetails"]:   
+            for song in jsonObject["stepDetails"]:   
                 if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
 		    print song['status']
                     resetLeds (ring,Color(0,0,0))
