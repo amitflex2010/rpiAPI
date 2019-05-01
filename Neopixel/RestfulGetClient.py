@@ -32,7 +32,7 @@ LED_1_STRIP      = ws.SK6812_STRIP_GRBW
 
 
 # Replace with the correct URL
-url = "https://api-dashboard-ite.klm.com/api/postman/flows?envName=ute3&&isFlow=false"
+url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContacts"
 
 def loopLed(strip1, color1, wait_ms):
 
@@ -67,17 +67,17 @@ def pollEndPoint(sc):
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
 	    jData = json.loads(myResponse.content)
-            #print(jData)
-            for song in jsonObject["stepDetails"]:   
-                if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
-		    print song['status']
-                    blackout(ring) 
-    	            loopLed (ring, Color(KLEUR_R, 0, 0),100)
-                else:
-                    resetLeds (ring,Color(0,0,0))    
-                    loopLed (ring, Color(0, KLEUR_G, 0),100)    
+            print(jData)
+            #for song in jsonObject["stepDetails"]:   
+                #if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
+		    #print song['status']
+                    #blackout(ring) 
+    	            #loopLed (ring, Color(KLEUR_R, 0, 0),100)
+                #else:
+                    #resetLeds (ring,Color(0,0,0))    
+                    #loopLed (ring, Color(0, KLEUR_G, 0),100)    
 
-            pass
+            #pass
 
            
         else:
@@ -104,16 +104,18 @@ def initialSetup():
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
                 jData = json.loads(myResponse.content)
-                for song in jsonObject["stepDetails"]:   
-                        if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
-                            print song['status']
-                            blackout(ring) 
-                            loopLed (ring, Color(KLEUR_R, 0, 0),100)
-                        else:
-                             blackout(ring)     
-                             loopLed (ring, Color(0, KLEUR_G, 0),100)    
+                blackout(ring)
+                loopLed (ring, Color(0, KLEUR_G, 0),100)
+                #for song in jsonObject["stepDetails"]:   
+                        #if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
+                            #print song['status']
+                            #blackout(ring) 
+                            l#oopLed (ring, Color(KLEUR_R, 0, 0),100)
+                        #else:
+                             #blackout(ring)     
+                             #loopLed (ring, Color(0, KLEUR_G, 0),100)    
 
-                pass
+                #pass
             else:
         # If response code is not ok (200), print the resulting http error code with description
                         print(myResponse.status_code)
