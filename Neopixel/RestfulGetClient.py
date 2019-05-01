@@ -97,11 +97,7 @@ def pollEndPoint(sc):
 def initialSetup():
         try:
             myResponse = requests.get(url)
-        except requests.exceptions.ConnectionError as errc:
-            blackout(ring) 
-            loopLed (ring, Color(KLEUR_R, 0, 0),100)    
-            print ("Http Error:",errc)
-            sys.exit(1)
+        
         # For successful API call, response code will be 200 (OK)
     
             if(myResponse.ok):
@@ -123,19 +119,24 @@ def initialSetup():
                 #pass
             else:
         # If response code is not ok (200), print the resulting http error code with description
-                        print(myResponse.status_code)
-                        blackout(ring) 
-                        loopLed (ring, Color(KLEUR_R, 0, 0),100)
+                print(myResponse.status_code)
+                blackout(ring) 
+                loopLed (ring, Color(KLEUR_R, 0, 0),100)
                 # myResponse.raise_for_status()
+        except requests.exceptions.ConnectionError as errc:
+            blackout(ring) 
+            loopLed (ring, Color(KLEUR_R, 0, 0),100)    
+            print ("Http Error:",errc)
+            sys.exit(1)        
                     
 
 
 ring = ring = Adafruit_NeoPixel(LED_1_COUNT, LED_1_PIN, LED_1_FREQ_HZ, LED_1_DMA, LED_1_INVERT, LED_1_BRIGHTNESS, LED_1_CHANNEL, LED_1_STRIP)
 ring.begin()
 initialSetup()
-s = sched.scheduler(time.time, time.sleep)
-s.enter(10, 1, pollEndPoint, (s,))
-s.run()
+#s = sched.scheduler(time.time, time.sleep)
+#s.enter(10, 1, pollEndPoint, (s,))
+#s.run()
 
 
 	
