@@ -59,33 +59,38 @@ def blackout(strip1):
 
 def pollEndPoint(sc):
 
-        myResponse = requests.get(url)
+       try:
+            myResponse = requests.get(url)
+        except requests.exceptions.ConnectionError as errc:
+            blackout(ring) 
+            loopLed (ring, Color(KLEUR_R, 0, 0),100)    
+            print ("Http Error:",errc)
+            sys.exit(1)
         # For successful API call, response code will be 200 (OK)
     
-        if(myResponse.ok):
+            if(myResponse.ok):
         # Loading the response data into a dict variable
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
-	    jData = json.loads(myResponse.content)
-            print(jData)
-            #for song in jsonObject["stepDetails"]:   
-                #if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
-		    #print song['status']
-                    #blackout(ring) 
-    	            #loopLed (ring, Color(KLEUR_R, 0, 0),100)
-                #else:
-                    #resetLeds (ring,Color(0,0,0))    
-                    #loopLed (ring, Color(0, KLEUR_G, 0),100)    
+                jData = json.loads(myResponse.content)
+                blackout(ring)
+                loopLed (ring, Color(0, KLEUR_G, 0),100)
+                #for song in jsonObject["stepDetails"]:   
+                        #if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
+                            #print song['status']
+                            #blackout(ring) 
+                            l#oopLed (ring, Color(KLEUR_R, 0, 0),100)
+                        #else:
+                             #blackout(ring)     
+                             #loopLed (ring, Color(0, KLEUR_G, 0),100)    
 
-            #pass
-
-           
-        else:
+                #pass
+            else:
         # If response code is not ok (200), print the resulting http error code with description
-            print(myResponse.status_code)
-            blackout(ring) 
-    	    loopLed (ring, Color(KLEUR_R, 0, 0),100)
-	   # myResponse.raise_for_status()
+                        print(myResponse.status_code)
+                        blackout(ring) 
+                        loopLed (ring, Color(KLEUR_R, 0, 0),100)
+                # myResponse.raise_for_status()
 
         s.enter(10,1, pollEndPoint, (sc,))   
 
