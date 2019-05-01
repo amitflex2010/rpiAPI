@@ -82,19 +82,19 @@ def initialSetup():
                 jData = json.loads(myResponse.content)
                 for song in jsonObject["stepDetails"]:   
                         if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
-                        print song['status']
-                        resetLeds (ring,Color(0,0,0))
-                        loopLed (ring, Color(0, KLEUR_R, 0),100)
+                            print song['status']
+                            resetLeds (ring,Color(0,0,0))
+                            loopLed (ring, Color(0, KLEUR_R, 0),100)
                         else:
-                        resetLeds (ring,Color(0,0,0))    
-                        loopLed (ring, Color(KLEUR_G, 0, 0),100)    
+                             resetLeds (ring,Color(0,0,0))    
+                             loopLed (ring, Color(KLEUR_G, 0, 0),100)    
 
                 pass
             else:
         # If response code is not ok (200), print the resulting http error code with description
-                print(myResponse.status_code)
-                resetLeds (ring,Color(0,0,0))
-                loopLed (ring, Color(0, KLEUR_R, 0),100)
+                        print(myResponse.status_code)
+                        resetLeds (ring,Color(0,0,0))
+                        loopLed (ring, Color(0, KLEUR_R, 0),100)
                 # myResponse.raise_for_status()
                     
     
