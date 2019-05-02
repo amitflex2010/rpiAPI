@@ -71,7 +71,7 @@ def pollEndPoint(sc):
                 jData = json.loads(myResponse.content)
                 blackout(ring)
                 loopLed (ring, Color(0, KLEUR_G, 0),100)
-                for song in jsonObject["stepDetails"]:   
+                for song in jData["stepDetails"]:   
                         if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
                             print song['status']
                             blackout(ring) 
@@ -110,7 +110,7 @@ def initialSetup():
                 print('data')
                 blackout(ring)
                 loopLed (ring, Color(0, KLEUR_G, 0),100)
-                for song in jsonObject["stepDetails"]:   
+                for song in jData["stepDetails"]:   
                         if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
                             print song['status']
                             blackout(ring) 
