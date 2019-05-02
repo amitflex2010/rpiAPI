@@ -76,9 +76,11 @@ def pollEndPoint(sc):
                             print song['status']
                             blackout(ring) 
                             loopLed (ring, Color(KLEUR_R, 0, 0),100)
+                            break
                         else:
-                             blackout(ring)     
-                             loopLed (ring, Color(0, KLEUR_G, 0),100)    
+                             print('here')
+                            # blackout(ring)     
+                            # loopLed (ring, Color(0, KLEUR_G, 0),100)    
 
                 pass
             else:
@@ -115,9 +117,11 @@ def initialSetup():
                             print song['status']
                             blackout(ring) 
                             loopLed (ring, Color(KLEUR_R, 0, 0),100)
+                            break
                         else:
-                             blackout(ring)     
-                             loopLed (ring, Color(0, KLEUR_G, 0),100)    
+                             print('here')
+                            # blackout(ring)     
+                            # loopLed (ring, Color(0, KLEUR_G, 0),100)    
 
                 pass
             else:
