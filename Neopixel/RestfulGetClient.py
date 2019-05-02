@@ -32,7 +32,7 @@ LED_1_STRIP      = ws.SK6812_STRIP_GRBW
 
 
 # Replace with the correct URL
-url = "https://us-central1-mysampleproject-3b9ff.cloudfunctions.net/nodeapp/getContacts"
+url = "https://api-dashboard-ite.klm.com/api/postman/flows?envName=ute3&&isFlow=false"
 
 def loopLed(strip1, color1, wait_ms):
 
@@ -71,16 +71,16 @@ def pollEndPoint(sc):
                 jData = json.loads(myResponse.content)
                 blackout(ring)
                 loopLed (ring, Color(0, KLEUR_G, 0),100)
-                #for song in jsonObject["stepDetails"]:   
-                        #if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
-                            #print song['status']
-                            #blackout(ring) 
-                            #loopLed (ring, Color(KLEUR_R, 0, 0),100)
-                        #else:
-                             #blackout(ring)     
-                             #loopLed (ring, Color(0, KLEUR_G, 0),100)    
+                for song in jsonObject["stepDetails"]:   
+                        if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
+                            print song['status']
+                            blackout(ring) 
+                            loopLed (ring, Color(KLEUR_R, 0, 0),100)
+                        else:
+                             blackout(ring)     
+                             loopLed (ring, Color(0, KLEUR_G, 0),100)    
 
-                #pass
+                pass
             else:
         # If response code is not ok (200), print the resulting http error code with description
                         print(myResponse.status_code)
@@ -110,16 +110,16 @@ def initialSetup():
                 print('data')
                 blackout(ring)
                 loopLed (ring, Color(0, KLEUR_G, 0),100)
-                #for song in jsonObject["stepDetails"]:   
-                        #if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
-                            #print song['status']
-                            #blackout(ring) 
-                            #loopLed (ring, Color(KLEUR_R, 0, 0),100)
-                        #else:
-                             #blackout(ring)     
-                             #loopLed (ring, Color(0, KLEUR_G, 0),100)    
+                for song in jsonObject["stepDetails"]:   
+                        if song['servicename'] == "BRE" and song['status'] == "FAIL"  :
+                            print song['status']
+                            blackout(ring) 
+                            loopLed (ring, Color(KLEUR_R, 0, 0),100)
+                        else:
+                             blackout(ring)     
+                             loopLed (ring, Color(0, KLEUR_G, 0),100)    
 
-                #pass
+                pass
             else:
         # If response code is not ok (200), print the resulting http error code with description
                 print(myResponse.status_code)
