@@ -35,7 +35,7 @@ LED_2_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_2_DMA        = 10      # DMA channel to use for generating signal (Between 1 and 14)
 LED_2_BRIGHTNESS = 128     # Set to 0 for darkest and 255 for brightest
 LED_2_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
-LED_2_CHANNEL    = 0       # 0 or 1
+LED_2_CHANNEL    = 1       # 0 or 1
 LED_2_STRIP      = ws.SK6812_STRIP_GRBW
 
 
@@ -87,7 +87,7 @@ def pollUte1():
                 blackout(ring2)
                 loopLed (ring2, Color(0, KLEUR_G, 0),100)
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "BRE" and item['status'] == "FAIL"  :
+                        if item['servicename'] == "Reservation API" and item['status'] == "FAIL"  :
                             print item['status']
                             blackout(ring2) 
                             loopLed (ring2, Color(KLEUR_R, 0, 0),100)    
@@ -121,7 +121,7 @@ def pollUte3():
                 blackout(ring1)
                 loopLed (ring1, Color(0, KLEUR_G, 0),100)
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "BRE" and item['status'] == "FAIL"  :
+                        if item['servicename'] == "Reservation API" and item['status'] == "FAIL"  :
                             print item['status']
                             blackout(ring1) 
                             loopLed (ring1, Color(KLEUR_R, 0, 0),100)    
