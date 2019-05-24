@@ -87,7 +87,7 @@ def pollUte1():
                 blackout(ring2)
                 loopLed (ring2, Color(0, KLEUR_G, 0),100)
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "BRE" and item['status'] == "FAIL"  :
+                        if item['servicename'] == "Flight Offer API" and item['status'] == "FAIL"  :
                             print item['status']
                             blackout(ring2) 
                             loopLed (ring2, Color(KLEUR_R, 0, 0),100)    
@@ -121,7 +121,7 @@ def pollUte3():
                 blackout(ring1)
                 loopLed (ring1, Color(0, KLEUR_G, 0),100)
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "BRE" and item['status'] == "FAIL"  :
+                        if item['servicename'] == "Flight Offer API" and item['status'] == "FAIL"  :
                             print item['status']
                             blackout(ring1) 
                             loopLed (ring1, Color(KLEUR_R, 0, 0),100)    
