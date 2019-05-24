@@ -42,7 +42,7 @@ LED_2_STRIP      = ws.SK6812_STRIP_GRBW
 
 # Replace with the correct URL
 UTE3_URL = "https://api-dashboard-ite.klm.com/api/postman/flows?envName=ute3&&isFlow=false"
-UTE1_URL = "https://api-dashboard-ite.klm.com/api/postman/flows?envName=ute1&&isFlow=false"
+UTE1_URL = "https://api-dashboard-ite.klm.com/api/postman/flows?envName=ute3&&isFlow=false"
 
 def loopLed(strip1, color1, wait_ms):
 
@@ -70,7 +70,7 @@ def blackout(strip1):
 def pollEndPoint(sc):
         pollUte3()
         pollUte1()
-        s.enter(10,1, pollEndPoint, (sc,))   
+        s.enter(5,1,pollEndpoint,(sc,))
 
 def pollUte1():
         try:
@@ -86,12 +86,12 @@ def pollUte1():
                 print('UTE1')
                 blackout(ring2)
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "Flight Offer API" and item['status'] == "FAIL"  :
+                        if item['servicename'] == "'CheckIN" and item['status'] == "SUCCESS"  :
                             print item['status']
-                            loopLed (ring2, Color(KLEUR_R, 0, 0),100)
+                            loopLed (ring2, Color(0, KLEUR_G, 0),100)
                             return
 
-                        loopLed (ring2, Color(0, KLEUR_G, 0),100)    
+                        loopLed (ring2, Color( KLEUR_R, 0,  0),100)    
 
                 pass
             else:
@@ -121,12 +121,12 @@ def pollUte3():
                 print('UTE3')
                 blackout(ring1)
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "Flight Offer API" and item['status'] == "FAIL"  :
+                        if item['servicename'] == "Reservation API" and item['status'] == "SUCCESS"  :
                             print item['status']
-                            loopLed (ring1, Color(KLEUR_R, 0, 0),100)
+                            loopLed (ring1, Color(0, KLEUR_G, 0),100)
                             return
 
-                        loopLed (ring1, Color(0, KLEUR_G, 0),100)    
+                        loopLed (ring1, Color(KLEUR_R, 0, 0),100)    
 
                 pass
             else:
@@ -154,7 +154,8 @@ ring2.begin()
 initialSetup()
 s = sched.scheduler(time.time, time.sleep)
 s.enter(10, 1, pollEndPoint, (s,))
+#pollEndPoint(s)
 s.run()
 
 
-	
+
