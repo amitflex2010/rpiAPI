@@ -83,14 +83,15 @@ def pollUte1():
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
                 jData = json.loads(ute1Response.content)
-                print('data')
+                print('UTE1')
                 blackout(ring2)
-                loopLed (ring2, Color(0, KLEUR_G, 0),100)
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "BRE" and item['status'] == "FAIL"  :
+                        if item['servicename'] == "Flight Offer API" and item['status'] == "FAIL"  :
                             print item['status']
-                            blackout(ring2) 
-                            loopLed (ring2, Color(KLEUR_R, 0, 0),100)    
+                            loopLed (ring2, Color(KLEUR_R, 0, 0),100)
+                            return
+
+                        loopLed (ring2, Color(0, KLEUR_G, 0),100)    
 
                 pass
             else:
@@ -117,14 +118,15 @@ def pollUte3():
 	# json.loads takes in only binary or string variables so using content to fetch binary content
         # Loads (Load String) takes a Json file and converts into python data structure (dict or list, depending on JSON)
                 jData = json.loads(ute3Response.content)
-                print('data')
+                print('UTE3')
                 blackout(ring1)
-                loopLed (ring1, Color(0, KLEUR_G, 0),100)
                 for item in jData["stepDetails"]:   
                         if item['servicename'] == "Flight Offer API" and item['status'] == "FAIL"  :
                             print item['status']
-                            blackout(ring1) 
-                            loopLed (ring1, Color(KLEUR_R, 0, 0),100)    
+                            loopLed (ring1, Color(KLEUR_R, 0, 0),100)
+                            return
+
+                        loopLed (ring1, Color(0, KLEUR_G, 0),100)    
 
                 pass
             else:
