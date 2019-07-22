@@ -88,11 +88,11 @@ def pollUte1():
                         if item['servicename'] == "'CheckIN" and item['status'] == "FAIL"  :
                             print item['status']
                             loopLed (ring2, Color(KLEUR_R, 0, 0),100)
-                            return
-                        print('UTE1 - after')
-                        loopLed (ring2, Color( 0, KLEUR_G,  0),100)    
+                            return    
 
                 pass
+                print('UTE1 - after')
+                loopLed (ring2, Color( 0, KLEUR_G,  0),100)
             else:
         # If response code is not ok (200), print the resulting http error code with description
                 print(ute1Response.status_code)
@@ -124,10 +124,9 @@ def pollUte3():
                             print item['status']
                             loopLed (ring1, Color(KLEUR_R, 0, 0),100)
                             return
-                        print('UTE3 - after')
-                        loopLed (ring1, Color(0, KLEUR_G, 0),100)    
-
                 pass
+                print('UTE3 - after')
+                loopLed (ring1, Color(0, KLEUR_G, 0),100)  
             else:
         # If response code is not ok (200), print the resulting http error code with description
                 print(ute3Response.status_code)
