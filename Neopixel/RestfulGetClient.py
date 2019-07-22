@@ -70,6 +70,7 @@ def blackout(strip1):
 def pollEndPoint(sc):
         pollUte3()
         pollUte1()
+        s.enter(10, 1, pollEndPoint, (sc,))
 
 def pollUte1():
         try:
@@ -151,7 +152,7 @@ ring1.begin()
 ring2.begin()
 initialSetup()
 s = sched.scheduler(time.time, time.sleep)
-s.enter(5, 1, pollEndPoint, (s,))
+s.enter(10, 1, pollEndPoint, (s,))
 s.run()
 
 
