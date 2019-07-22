@@ -70,7 +70,6 @@ def blackout(strip1):
 def pollEndPoint(sc):
         pollUte3()
         pollUte1()
-        s.enter(5,1,pollEndpoint,(sc,))
 
 def pollUte1():
         try:
@@ -86,12 +85,12 @@ def pollUte1():
                 print('UTE1')
                 blackout(ring2)
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "'CheckIN" and item['status'] == "SUCCESS"  :
+                        if item['servicename'] == "'CheckIN" and item['status'] == "FAIL"  :
                             print item['status']
-                            loopLed (ring2, Color(0, KLEUR_G, 0),100)
+                            loopLed (ring2, Color(KLEUR_R, 0, 0),100)
                             return
-
-                        loopLed (ring2, Color( KLEUR_R, 0,  0),100)    
+                        print('UTE1 - after')
+                        loopLed (ring2, Color( 0, KLEUR_G,  0),100)    
 
                 pass
             else:
@@ -121,12 +120,12 @@ def pollUte3():
                 print('UTE3')
                 blackout(ring1)
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "Reservation API" and item['status'] == "SUCCESS"  :
+                        if item['servicename'] == "Reservation API" and item['status'] == "FAIL"  :
                             print item['status']
-                            loopLed (ring1, Color(0, KLEUR_G, 0),100)
+                            loopLed (ring1, Color(KLEUR_R, 0, 0),100)
                             return
-
-                        loopLed (ring1, Color(KLEUR_R, 0, 0),100)    
+                        print('UTE3 - after')
+                        loopLed (ring1, Color(0, KLEUR_G, 0),100)    
 
                 pass
             else:
@@ -153,8 +152,7 @@ ring1.begin()
 ring2.begin()
 initialSetup()
 s = sched.scheduler(time.time, time.sleep)
-s.enter(10, 1, pollEndPoint, (s,))
-#pollEndPoint(s)
+s.enter(5, 1, pollEndPoint, (s,))
 s.run()
 
 
