@@ -42,7 +42,7 @@ LED_2_STRIP      = ws.SK6812_STRIP_GRBW
 
 # Replace with the correct URL
 UTE3_URL = "https://api-dashboard-ite.klm.com/api/postman/flows?envName=ute3&&isFlow=false"
-UTE1_URL = "https://api-dashboard-ite.klm.com/api/postman/flows?envName=ute3&&isFlow=false"
+UTE1_URL = "https://api-dashboard-ite.klm.com/api/postman/flows?envName=ute1&&isFlow=false"
 
 def loopLed(strip1, color1, wait_ms):
 
@@ -85,9 +85,11 @@ def pollUte1():
                 jData = json.loads(ute1Response.content)
                 print('UTE1')
                 blackout(ring2)
+                found = "no"
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "'CheckIN" and item['status'] == "FAIL"  :
+                        if item['servicename'] == "Order API" and item['status'] == "FAIL"  :
                             print item['status']
+                            found = "yes"
                             loopLed (ring2, Color(KLEUR_R, 0, 0),100)
                             return    
 
@@ -121,7 +123,7 @@ def pollUte3():
                 print('UTE3')
                 blackout(ring1)
                 for item in jData["stepDetails"]:   
-                        if item['servicename'] == "Reservation API" and item['status'] == "FAIL"  :
+                        if item['servicename'] == "Order API" and item['status'] == "FAIL"  :
                             print item['status']
                             loopLed (ring1, Color(KLEUR_R, 0, 0),100)
                             return
