@@ -39,7 +39,7 @@ LED_2_CHANNEL    = 1       # 0 or 1
 LED_2_STRIP      = ws.SK6812_STRIP_GRBW
 
 LED_3_COUNT      = 7      # Number of LED pixels.
-LED_3_PIN        = 13      # GPIO pin connected to the pixels (must support PWM! GPIO 13 and 18 on RPi 3).
+LED_3_PIN        = 12      # GPIO pin connected to the pixels (must support PWM! GPIO 13 and 18 on RPi 3).
 LED_3_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_3_DMA        = 10      # DMA channel to use for generating signal (Between 1 and 14)
 LED_3_BRIGHTNESS = 128     # Set to 0 for darkest and 255 for brightest
